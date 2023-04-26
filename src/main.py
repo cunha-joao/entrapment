@@ -9,10 +9,10 @@ from games.poker.players.always_pass import AlwaysPassKuhnPokerPlayer
 from games.poker.players.cfr import CFRKuhnPokerPlayer
 from games.poker.players.random import RandomKuhnPokerPlayer
 from games.poker.simulator import KuhnPokerSimulator
-from src.games.entrapment.players.human import HumanEntrapmentPlayer
-from src.games.entrapment.players.random import RandomEntrapmentPlayer
-from src.games.entrapment.simulator import EntrapmentSimulator
-from board import jogar_entrapment
+from games.entrapment.players.human import HumanEntrapmentPlayer
+from games.entrapment.players.random import RandomEntrapmentPlayer
+from games.entrapment.simulator import EntrapmentSimulator
+from games.entrapment.board import jogar_entrapment
 
 
 def run_simulation(desc: str, simulator: GameSimulator, iterations: int):
