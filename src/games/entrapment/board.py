@@ -1,3 +1,10 @@
+# Função para exibir o tabuleiro
+def exibir_tabuleiro(tabuleiro):
+    # Implemente a lógica para exibir o tabuleiro de acordo com o formato desejado
+    # por exemplo, utilizando print para exibir cada elemento do tabuleiro em uma grade
+    # ou utilizando uma biblioteca gráfica para exibir uma representação visual do tabuleiro
+    pass
+
 # Função para verificar se uma posição é válida no tabuleiro
 def posicao_valida(tabuleiro, posicao):
     # Verificar se a posição está dentro dos limites do tabuleiro
@@ -78,20 +85,22 @@ def jogar_entrapment():
         posicao_atual = capturar_posicao_atual()
 
         # Capturar a posição de destino do jogador
-        posicao_destino = capturar_posicao_destino()
+        posicao_destino = capturar_posicao_atual()
 
-        # Verificar se o movimento é válido
-        if not movimento_valido(tabuleiro, posicao_atual, posicao_destino):
-            print("Movimento inválido. Tente novamente.")
-            continue
+def movimento_valido(tabuleiro, posicao_atual, posicao_destino):
+    # Verificar se a posição de destino está vazia
+    if tabuleiro[posicao_destino[0]][posicao_destino[1]] == VAZIO:
+        # Verificar se o movimento é válido (por exemplo, apenas uma casa de distância em linha reta)
+        if abs(posicao_destino[0] - posicao_atual[0]) <= 1 and abs(posicao_destino[1] - posicao_atual[1]) <= 1:
+            return True
+    return False
 
         # Atualizar a posição das peças no tabuleiro
-        atualizar_posicao(tabuleiro, posicao_atual, posicao_destino)
+def atualizar_posicao(tabuleiro, posicao_atual, posicao_destino):
 
         # Verificar condições de vitória/derrota
-        if verificar_vitoria_derrota(tabuleiro):
-            jogo_terminado = True
-            continue
+    if verificar_vitoria_derrota(tabuleiro):
+        jogo_terminado = True
 
         # Alternar jogador atual
         if jogador_atual == 1:
