@@ -12,6 +12,7 @@ from games.poker.simulator import KuhnPokerSimulator
 from src.games.entrapment.players.human import HumanEntrapmentPlayer
 from src.games.entrapment.players.random import RandomEntrapmentPlayer
 from src.games.entrapment.simulator import EntrapmentSimulator
+from board import jogar_entrapment
 
 
 def run_simulation(desc: str, simulator: GameSimulator, iterations: int):
@@ -27,7 +28,9 @@ def run_simulation(desc: str, simulator: GameSimulator, iterations: int):
 
 def main():
     print("ESTG IA Games Simulator")
-
+    
+    jogar_entrapment()
+    
     num_iterations = 10
 
     # c4_simulations = [
