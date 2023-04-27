@@ -33,36 +33,34 @@ class HumanEntrapmentPlayer(EntrapmentPlayer):
 
                     if m_type == 1:
                         for i in range(0, 1):
-                            print(f"Player {state.get_acting_player()}, choose a column "
-                                  f"(with the roamer you wish to move): ")
+                            print(f"Player {state.get_acting_player()}, choose the column "
+                                  f"with the roamer you wish to move: ")
                             col = int(input())
-                            print(f"Player {state.get_acting_player()}, choose a row "
-                                  f"(with the roamer you wish to move): ")
+                            print(f"Player {state.get_acting_player()}, choose the row "
+                                  f"with the roamer you wish to move: ")
                             row = int(input())
-                            print(f"Player {state.get_acting_player()}, choose a column "
-                                  f"(new column for the roamer): ")
+                            print(f"Player {state.get_acting_player()}, choose the new column "
+                                  f"for the roamer: ")
                             new_col = int(input())
-                            print(f"Player {state.get_acting_player()}, choose a row "
-                                  f"(new row for the roamer): ")
+                            print(f"Player {state.get_acting_player()}, choose the new row "
+                                  f"for the roamer: ")
                             new_row = int(input())
                             wall_col = 0
                             wall_row = 0
                             return EntrapmentAction(col, row, new_col, new_row, wall_col, wall_row, m_type)
 
                     elif m_type == 2:
-                        print(f"Player {state.get_acting_player()}, choose a column (with the roamer you wish to move): ")
+                        print(f"Player {state.get_acting_player()}, choose the column with the roamer you wish to move: ")
                         col = int(input())
-                        print(f"Player {state.get_acting_player()}, choose a row (with the roamer you wish to move): ")
+                        print(f"Player {state.get_acting_player()}, choose the row with the roamer you wish to move: ")
                         row = int(input())
-                        print(f"Player {state.get_acting_player()}, choose a column "
-                              f"(new column for the roamer): ")
+                        print(f"Player {state.get_acting_player()}, choose the new column for the roamer: ")
                         new_col = int(input())
-                        print(f"Player {state.get_acting_player()}, choose a row "
-                              f"(new row for the roamer): ")
+                        print(f"Player {state.get_acting_player()}, choose the new row for the roamer: ")
                         new_row = int(input())
-                        print(f"Player {state.get_acting_player()}, choose a column (column to place a wall): ")
+                        print(f"Player {state.get_acting_player()}, choose a column to place a wall: ")
                         wall_col = int(input())
-                        print(f"Player {state.get_acting_player()}, choose a row (row to place a wall): ")
+                        print(f"Player {state.get_acting_player()}, choose a row to place a wall: ")
                         wall_row = int(input())
                         return EntrapmentAction(col, row, new_col, new_row, wall_col, wall_row, m_type)
                     else:
