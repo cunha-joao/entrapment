@@ -9,9 +9,9 @@ from games.poker.players.always_pass import AlwaysPassKuhnPokerPlayer
 from games.poker.players.cfr import CFRKuhnPokerPlayer
 from games.poker.players.random import RandomKuhnPokerPlayer
 from games.poker.simulator import KuhnPokerSimulator
-from src.games.entrapment.players.human import HumanEntrapmentPlayer
-from src.games.entrapment.players.random import RandomEntrapmentPlayer
-from src.games.entrapment.simulator import EntrapmentSimulator
+from games.entrapment.players.human import HumanEntrapmentPlayer
+from games.entrapment.players.random import RandomEntrapmentPlayer
+from games.entrapment.simulator import EntrapmentSimulator
 
 
 def run_simulation(desc: str, simulator: GameSimulator, iterations: int):
@@ -28,7 +28,7 @@ def run_simulation(desc: str, simulator: GameSimulator, iterations: int):
 def main():
     print("ESTG IA Games Simulator")
 
-    num_iterations = 10
+    num_iterations = 1
 
     # c4_simulations = [
     #     # uncomment to play as human
