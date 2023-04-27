@@ -30,8 +30,6 @@ def main():
     print("Number of iterations: ")
     num_iterations = int(input())
 
-
-
     # c4_simulations = [
     #     # uncomment to play as human
     #     #{
