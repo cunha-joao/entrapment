@@ -27,8 +27,10 @@ def run_simulation(desc: str, simulator: GameSimulator, iterations: int):
 
 def main():
     print("ESTG IA Games Simulator")
+    print("Number of iterations: ")
+    num_iterations = int(input())
 
-    num_iterations = 1
+
 
     # c4_simulations = [
     #     # uncomment to play as human
