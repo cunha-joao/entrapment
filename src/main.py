@@ -13,6 +13,7 @@ from games.entrapment.players.human import HumanEntrapmentPlayer
 from games.entrapment.players.random import RandomEntrapmentPlayer
 from games.entrapment.simulator import EntrapmentSimulator
 from games.entrapment.board import jogar_entrapment
+from games.entrapment.game_simulation import simulacao_jogos
 
 
 def run_simulation(desc: str, simulator: GameSimulator, iterations: int):
@@ -31,7 +32,37 @@ def main():
     
     jogar_entrapment()
     
-    num_iterations = 10
+    num_iterations = int(input("Selecione o número de interações: "))
+
+    opcao_menu = input("Selecione uma opção do menu: ")
+
+    if opcao_menu == '1':
+        simulador_connect4 = Connect4Simulator(RandomConnect4Player("player1"), RandomConnect4Player("player2"))
+        run_simulation("Connect4 - Random VS Random", simulador_connect4, num_iterations)
+
+    elif opcao_menu == '2':
+        simulador_connect4 = Connect4Simulator(GreedyConnect4Player("player1"), RandomConnect4Player("player2"))
+        run_simulation("Connect4 - Greedy VS Random", simulador_connect4, num_iterations)
+
+    elif opcao_menu == '3':
+        simulador_connect4 = Connect4Simulator(MinimaxConnect4Player("player1"), RandomConnect4Player("player2"))
+        run_simulation("Connect4 - Minimax VS Random", simulador_connect4, num_iterations)
+
+    elif opcao_menu == '4':
+        nivel_dificuldade1 = input("Digite o nível de dificuldade do jogador 1 (fácil, médio ou difícil): ")
+        nivel_dificuldade2 = input("Digite o nível de dificuldade do jogador 2 (fácil, médio ou difícil): ")
+        num_simulacoes = int(input("Digite o número de simulações que deseja realizar: "))
+        simulacao_jogos(num_simulacoes, nivel_dificuldade1, nivel_dificuldade2)
+
+    elif opcao_menu == '5':
+        simulador_entrapment = EntrapmentSimulator(HumanEntrapmentPlayer("player1"), RandomEntrapmentPlayer("player2"))
+        run_simulation("Entrapment - Human VS Random", simulador_entrapment, num_iterations)
+
+   
+ 
+    else:
+        print("Opção inválida!")
+
 
     # c4_simulations = [
     #     # uncomment to play as human
