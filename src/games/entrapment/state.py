@@ -118,12 +118,12 @@ class EntrapmentState(State):
             print("Invalid row!")
             return False
 
-        # each roamer can only move house at a time
+        # each roamer can only move one house at a time
         if new_col > (col + 1):
-            print("Invalid new column!")
+            print("Invalid new column! (can only move one house at a time)")
             return False
         if new_row > (row + 1):
-            print("Invalid new row!")
+            print("Invalid new row! (can only move one house at a time)")
             return False
 
         return True
