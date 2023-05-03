@@ -14,6 +14,7 @@ from games.entrapment.players.random import RandomEntrapmentPlayer
 from games.entrapment.simulator import EntrapmentSimulator
 
 
+
 def run_simulation(desc: str, simulator: GameSimulator, iterations: int):
     print(f"----- {desc} -----")
 
@@ -29,6 +30,7 @@ def main():
     print("ESTG IA Games Simulator")
     print("Number of iterations: ")
     num_iterations = int(input())
+
 
     # c4_simulations = [
     #     # uncomment to play as human
@@ -113,13 +115,15 @@ def main():
     #     }
     # ]
 
-    etp_simulations = [
-        {
-           "name": "Entrapment - Human VS Human",
-           "player1": HumanEntrapmentPlayer("Human"),
-           "player2": HumanEntrapmentPlayer("Human")
-        }
-    ]
+    #etp_simulations = [
+     #   {
+      #     "name": "Entrapment - Human VS Human",
+       #    "player1": HumanEntrapmentPlayer("Human"),
+        #   "player2": HumanEntrapmentPlayer("Human")
+        #}
+    #]
+
+
 
     # for sim in c4_simulations:
     #     run_simulation(sim["name"], Connect4Simulator(sim["player1"], sim["player2"]), num_iterations)
@@ -127,9 +131,27 @@ def main():
     # for sim in poker_simulations:
     #     run_simulation(sim["name"], KuhnPokerSimulator(sim["player1"], sim["player2"]), num_iterations)
 
-    for sim in etp_simulations:
-        run_simulation(sim["name"], EntrapmentSimulator(sim["player1"], sim["player2"]), num_iterations)
+    #for sim in etp_simulations:
+     #   run_simulation(sim["name"], EntrapmentSimulator(sim["player1"], sim["player2"]), num_iterations)
 
+    PLAYER_1 = "Player 1"
+    PLAYER_2 = "Player 2"
+
+    player1 = HumanEntrapmentPlayer(PLAYER_1)
+    player2 = None
+    difficulty = input("Choose difficulty level (easy/medium/hard): ")
+    if difficulty == "easy":
+        player2 = RandomEntrapmentPlayer(PLAYER_2)
+    elif difficulty == "medium":
+        player2 = GreedyEntrapmentPlayer(PLAYER_2)
+    elif difficulty == "hard":
+        player2 = MinimaxEntrapmentPlayer(PLAYER_2)
+    else:
+        print("Invalid difficulty level. Please choose from 'easy', 'medium', or 'hard'.")
+        return
+
+    simulator = EntrapmentSimulator(player1, player2, difficulty)
+    simulator.run()
 
 if __name__ == "__main__":
     main()
