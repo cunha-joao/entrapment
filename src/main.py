@@ -138,13 +138,13 @@ def main():
     #     }
     # ]
 
-    #etp_simulations = [
-     #   {
-      #     "name": "Entrapment - Human VS Human",
-       #    "player1": HumanEntrapmentPlayer("Human"),
-        #   "player2": HumanEntrapmentPlayer("Human")
-        #}
-    #]
+    etp_simulations = [
+        {
+           "name": "Entrapment - Human0 VS Human1",
+           "player1": HumanEntrapmentPlayer("Human0"),
+           "player2": HumanEntrapmentPlayer("Human1")
+        }
+    ]
 
     # for sim in c4_simulations:
     #     run_simulation(sim["name"], Connect4Simulator(sim["player1"], sim["player2"]), num_iterations)
