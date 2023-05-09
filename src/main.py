@@ -14,7 +14,6 @@ from games.entrapment.players.random import RandomEntrapmentPlayer
 from games.entrapment.simulator import EntrapmentSimulator
 from games.entrapment.players.greedy import GreedyEntrapmentPlayer
 from games.entrapment.players.minimax import MinimaxEntrapmentPlayer
-from games.entrapment.players.minimax_defensive import MinimaxEntrapmentPlayerDefensive
 
 
 def run_simulation(desc: str, simulator: GameSimulator, iterations: int):
