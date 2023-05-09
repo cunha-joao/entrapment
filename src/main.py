@@ -17,9 +17,6 @@ from games.entrapment.players.minimax import MinimaxEntrapmentPlayer
 from games.entrapment.players.minimax_defensive import MinimaxEntrapmentPlayerDefensive
 
 
-
-
-
 def run_simulation(desc: str, simulator: GameSimulator, iterations: int):
     print(f"----- {desc} -----")
 
@@ -33,27 +30,8 @@ def run_simulation(desc: str, simulator: GameSimulator, iterations: int):
 
 def main():
     print("ESTG IA Games Simulator")
-    #print("Number of iterations: ")
-    #num_iterations = int(input())
     num_iterations = int(input("Number of iterations: "))
-    player1 = HumanEntrapmentPlayer("Human")
-    player2 = None
-
-    difficulty = input("Choose difficulty level (1: easy / 2: medium / 3: hard): ")
-
-    if difficulty == "1":
-        player2 = RandomEntrapmentPlayer("Computer")
-    elif difficulty == "2":
-        player2 = MinimaxEntrapmentPlayer("Computer")
-    elif difficulty == "3":
-        player2 = MinimaxEntrapmentPlayerDefensive("Computer")
-    else:
-        print("Invalid difficulty level. Please choose from '1', '2', or '3'.")
-        return
-    
-    simulator = EntrapmentSimulator(player1, player2, difficulty)
-    run_simulation("Entrapment - Human VS Computer", simulator, num_iterations)
-
+    adversary = int(input("Adversary type (1: Human vs Human / 2: Human vs Computer / 3: Computer vs Computer): "))
 
     # c4_simulations = [
     #     # uncomment to play as human
@@ -83,7 +61,7 @@ def main():
     #         "player2": GreedyConnect4Player("Greedy")
     #     }
     # ]
-    #
+
     # poker_simulations = [
     #     # uncomment to play as human
     #     #{
@@ -138,23 +116,96 @@ def main():
     #     }
     # ]
 
-    #etp_simulations = [
-     #   {
-      #     "name": "Entrapment - Human VS Human",
-       #    "player1": HumanEntrapmentPlayer("Human"),
-        #   "player2": HumanEntrapmentPlayer("Human")
-        #}
-    #]
-
     # for sim in c4_simulations:
     #     run_simulation(sim["name"], Connect4Simulator(sim["player1"], sim["player2"]), num_iterations)
-    #
+
     # for sim in poker_simulations:
     #     run_simulation(sim["name"], KuhnPokerSimulator(sim["player1"], sim["player2"]), num_iterations)
 
-    #for sim in etp_simulations:
-     #   run_simulation(sim["name"], EntrapmentSimulator(sim["player1"], sim["player2"]), num_iterations)
-   
+    if adversary == 1:
+        etp_simulations = [
+            {
+                "name": "Entrapment - Human VS Human",
+                "player1": HumanEntrapmentPlayer("Human 0"),
+                "player2": HumanEntrapmentPlayer("Human 1")
+            }
+        ]
+        for sim in etp_simulations:
+            run_simulation(sim["name"], EntrapmentSimulator(sim["player1"], sim["player2"]), num_iterations)
+
+    elif adversary == 2:
+        difficulty = int(input("Difficulty (1: Easy / 2: Medium / 3: Hard): "))
+        if difficulty == 1:
+            etp_simulations = [
+                {
+                    "name": "Entrapment - Human VS Random (Easy)",
+                    "player1": HumanEntrapmentPlayer("Human"),
+                    "player2": RandomEntrapmentPlayer("Random")
+                }
+            ]
+            for sim in etp_simulations:
+                run_simulation(sim["name"], EntrapmentSimulator(sim["player1"], sim["player2"]), num_iterations)
+        elif difficulty == 2:
+            etp_simulations = [
+                {
+                    "name": "Entrapment - Human VS Greedy (Medium)",
+                    "player1": HumanEntrapmentPlayer("Human"),
+                    "player2": GreedyEntrapmentPlayer("Greedy")
+                }
+            ]
+            for sim in etp_simulations:
+                run_simulation(sim["name"], EntrapmentSimulator(sim["player1"], sim["player2"]), num_iterations)
+        elif difficulty == 3:
+            etp_simulations = [
+                {
+                    "name": "Entrapment - Human VS Minimax (Hard)",
+                    "player1": HumanEntrapmentPlayer("Human"),
+                    "player2": MinimaxEntrapmentPlayer("Minimax")
+                }
+            ]
+            for sim in etp_simulations:
+                run_simulation(sim["name"], EntrapmentSimulator(sim["player1"], sim["player2"]), num_iterations)
+        else:
+            print("Invalid difficulty choice!")
+
+    elif adversary == 3:
+        etp_simulations = [
+            {
+                "name": "Entrapment - Random (Easy) VS Random (Easy)",
+                "player1": RandomEntrapmentPlayer("Random 0"),
+                "player2": RandomEntrapmentPlayer("Random 1")
+            },
+            {
+                "name": "Entrapment - Random (Easy) VS Greedy (Medium)",
+                "player1": RandomEntrapmentPlayer("Random"),
+                "player2": GreedyEntrapmentPlayer("Greedy")
+            },
+            {
+                "name": "Entrapment - Random (Easy) VS Minimax (Hard)",
+                "player1": RandomEntrapmentPlayer("Random"),
+                "player2": MinimaxEntrapmentPlayer("Minimax")
+            },
+            {
+                "name": "Entrapment - Greedy (Medium) VS Greedy (Medium)",
+                "player1": GreedyEntrapmentPlayer("Greedy 0"),
+                "player2": GreedyEntrapmentPlayer("Greedy 1")
+            },
+            {
+                "name": "Entrapment - Greedy (Medium) VS Minimax (Hard)",
+                "player1": GreedyEntrapmentPlayer("Greedy"),
+                "player2": MinimaxEntrapmentPlayer("Minimax")
+            },
+            {
+                "name": "Entrapment - Minimax (Hard) VS Minimax (Hard)",
+                "player1": MinimaxEntrapmentPlayer("Minimax 0"),
+                "player2": MinimaxEntrapmentPlayer("Minimax 1")
+            }
+        ]
+        for sim in etp_simulations:
+            run_simulation(sim["name"], EntrapmentSimulator(sim["player1"], sim["player2"]), num_iterations)
+    else:
+        print("Invalid adversary choice!")
+
 
 if __name__ == "__main__":
     main()

@@ -43,38 +43,18 @@ class EntrapmentState(State):
         self.__has_winner = False
 
     def __check_winner(self, player):
-        # check for 3 across
         for row in range(0, self.__num_rows):
-            for col in range(0, self.__num_cols - 2):
-                if self.__grid[row][col] == player and \
-                        self.__grid[row][col + 1] == player and \
-                        self.__grid[row][col + 2] == player:
-                    return True
-
-        # check for 3 up and down
-        for row in range(0, self.__num_rows - 2):
             for col in range(0, self.__num_cols):
-                if self.__grid[row][col] == player and \
-                        self.__grid[row + 1][col] == player and \
-                        self.__grid[row + 2][col] == player:
+                if self.__grid[row][col] == player:
+                    if col > 0 and self.__grid[row][col - 1] != (player + 2):
+                        continue
+                    if col < self.__num_cols - 1 and self.__grid[row][col + 1] != (player + 2):
+                        continue
+                    if row > 0 and self.__grid[row - 1][col] != (player + 2):
+                        continue
+                    if row < self.__num_rows - 1 and self.__grid[row + 1][col] != (player + 2):
+                        continue
                     return True
-
-        # check upward diagonal
-        for row in range(0, self.__num_rows):
-            for col in range(0, self.__num_cols - 2):
-                if self.__grid[row][col] == player and \
-                        self.__grid[row - 1][col + 1] == player and \
-                        self.__grid[row - 2][col + 2] == player:
-                    return True
-
-        # check downward diagonal
-        for row in range(0, self.__num_rows - 2):
-            for col in range(0, self.__num_cols - 2):
-                if self.__grid[row][col] == player and \
-                        self.__grid[row + 1][col + 1] == player and \
-                        self.__grid[row + 2][col + 2] == player:
-                    return True
-
         return False
 
     def get_grid(self):
@@ -92,42 +72,40 @@ class EntrapmentState(State):
         wall_row = action.get_wall_row()
 
         # valid column
-        if col is None or col < 0 or col >= self.__num_cols:
+        if col < 0 or col >= self.__num_cols:
             print("Invalid column!")
             return False
         # valid row
-        if row is None or row < 0 or row >= self.__num_rows:
+        if row < 0 or row >= self.__num_rows:
             print("Invalid row!")
             return False
 
         # valid new column
-        if new_col is None:  # Adicionado tratamento para None
-            print("Invalid new column!")
-            return False
         if new_col < 0 or new_col >= self.__num_cols:
             print("Invalid new column!")
             return False
         # valid new row
-        if new_row is None or new_row < 0 or new_row >= self.__num_rows:
+        if new_row < 0 or new_row >= self.__num_rows:
             print("Invalid new row!")
             return False
 
         # valid wall column
-        if wall_col is None or wall_col < 0 or wall_col >= self.__num_cols:
+        if wall_col < 0 or wall_col >= self.__num_cols:
             print("Invalid column!")
             return False
         # valid wall row
-        if wall_row is None or wall_row < 0 or wall_row >= self.__num_rows:
+        if wall_row < 0 or wall_row >= self.__num_rows:
             print("Invalid row!")
             return False
 
         # each roamer can only move one house at a time
-        if new_col > (col + 1):
-            print("Invalid new column!")
-            return False
-        if new_row > (row + 1):
-            print("Invalid new row!")
-            return False
+        if self.check_stage() == 1:
+            if (new_col == (col + 1) or new_col == (col - 1)) and (new_row == (row + 1) or new_row == (row - 1)) or \
+                    (new_col == col) or (new_row == row):
+                return True
+            else:
+                print("Invalid column or row!")
+                return False
 
         return True
 
@@ -167,10 +145,10 @@ class EntrapmentState(State):
                     self.__grid[row][col] = EntrapmentState.EMPTY_CELL
             if self.__grid[wall_row][wall_col] < 0:
                 if self.__acting_player == 0:
-                    wall_ref = 2
+                    wall_ref = 3
                     self.__grid[wall_row][wall_col] = wall_ref
                 elif self.__acting_player == 1:
-                    wall_ref = 3
+                    wall_ref = 2
                     self.__grid[wall_row][wall_col] = wall_ref
 
         # determine if there is a winner
@@ -185,8 +163,8 @@ class EntrapmentState(State):
         print({
                   0: 'R ',
                   1: 'B ',
-                  2: 'RW',
-                  3: 'BW',
+                  2: 'BW',
+                  3: 'RW',
                   EntrapmentState.EMPTY_CELL: '  '
               }[self.__grid[row][col]], end="")
 
