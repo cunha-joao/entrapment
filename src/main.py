@@ -173,32 +173,32 @@ def main():
                 "name": "Entrapment - Random (Easy) VS Random (Easy)",
                 "player1": RandomEntrapmentPlayer("Random 0"),
                 "player2": RandomEntrapmentPlayer("Random 1")
-            },
-            {
-                "name": "Entrapment - Random (Easy) VS Greedy (Medium)",
-                "player1": RandomEntrapmentPlayer("Random"),
-                "player2": GreedyEntrapmentPlayer("Greedy")
-            },
-            {
-                "name": "Entrapment - Random (Easy) VS Minimax (Hard)",
-                "player1": RandomEntrapmentPlayer("Random"),
-                "player2": MinimaxEntrapmentPlayer("Minimax")
-            },
-            {
-                "name": "Entrapment - Greedy (Medium) VS Greedy (Medium)",
-                "player1": GreedyEntrapmentPlayer("Greedy 0"),
-                "player2": GreedyEntrapmentPlayer("Greedy 1")
-            },
-            {
-                "name": "Entrapment - Greedy (Medium) VS Minimax (Hard)",
-                "player1": GreedyEntrapmentPlayer("Greedy"),
-                "player2": MinimaxEntrapmentPlayer("Minimax")
-            },
-            {
-                "name": "Entrapment - Minimax (Hard) VS Minimax (Hard)",
-                "player1": MinimaxEntrapmentPlayer("Minimax 0"),
-                "player2": MinimaxEntrapmentPlayer("Minimax 1")
             }
+            # {
+            #     "name": "Entrapment - Random (Easy) VS Greedy (Medium)",
+            #     "player1": RandomEntrapmentPlayer("Random"),
+            #     "player2": GreedyEntrapmentPlayer("Greedy")
+            # },
+            # {
+            #     "name": "Entrapment - Random (Easy) VS Minimax (Hard)",
+            #     "player1": RandomEntrapmentPlayer("Random"),
+            #     "player2": MinimaxEntrapmentPlayer("Minimax")
+            # },
+            # {
+            #     "name": "Entrapment - Greedy (Medium) VS Greedy (Medium)",
+            #     "player1": GreedyEntrapmentPlayer("Greedy 0"),
+            #     "player2": GreedyEntrapmentPlayer("Greedy 1")
+            # },
+            # {
+            #     "name": "Entrapment - Greedy (Medium) VS Minimax (Hard)",
+            #     "player1": GreedyEntrapmentPlayer("Greedy"),
+            #     "player2": MinimaxEntrapmentPlayer("Minimax")
+            # },
+            # {
+            #     "name": "Entrapment - Minimax (Hard) VS Minimax (Hard)",
+            #     "player1": MinimaxEntrapmentPlayer("Minimax 0"),
+            #     "player2": MinimaxEntrapmentPlayer("Minimax 1")
+            # }
         ]
         for sim in etp_simulations:
             run_simulation(sim["name"], EntrapmentSimulator(sim["player1"], sim["player2"]), num_iterations)
