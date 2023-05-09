@@ -115,9 +115,9 @@ def main():
 
     etp_simulations = [
         {
-           "name": "Entrapment - Human VS Human",
-           "player1": HumanEntrapmentPlayer("Human"),
-           "player2": HumanEntrapmentPlayer("Human")
+           "name": "Entrapment - Human0 VS Human1",
+           "player1": HumanEntrapmentPlayer("Human0"),
+           "player2": HumanEntrapmentPlayer("Human1")
         }
     ]
 

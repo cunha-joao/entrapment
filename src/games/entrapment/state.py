@@ -74,7 +74,6 @@ class EntrapmentState(State):
                         self.__grid[row + 1][col + 1] == player and \
                         self.__grid[row + 2][col + 2] == player:
                     return True
-
         return False
 
     def get_grid(self):
@@ -164,10 +163,10 @@ class EntrapmentState(State):
                     self.__grid[row][col] = EntrapmentState.EMPTY_CELL
             if self.__grid[wall_row][wall_col] < 0:
                 if self.__acting_player == 0:
-                    wall_ref = 2
+                    wall_ref = 3
                     self.__grid[wall_row][wall_col] = wall_ref
                 elif self.__acting_player == 1:
-                    wall_ref = 3
+                    wall_ref = 2
                     self.__grid[wall_row][wall_col] = wall_ref
 
         # determine if there is a winner
@@ -182,8 +181,8 @@ class EntrapmentState(State):
         print({
                   0: 'R ',
                   1: 'B ',
-                  2: 'RW',
-                  3: 'BW',
+                  2: 'BW',
+                  3: 'RW',
                   EntrapmentState.EMPTY_CELL: '  '
               }[self.__grid[row][col]], end="")
 
