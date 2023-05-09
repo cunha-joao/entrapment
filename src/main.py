@@ -12,6 +12,11 @@ from games.poker.simulator import KuhnPokerSimulator
 from games.entrapment.players.human import HumanEntrapmentPlayer
 from games.entrapment.players.random import RandomEntrapmentPlayer
 from games.entrapment.simulator import EntrapmentSimulator
+from games.entrapment.players.greedy import GreedyEntrapmentPlayer
+from games.entrapment.players.minimax import MinimaxEntrapmentPlayer
+from games.entrapment.players.minimax_defensive import MinimaxEntrapmentPlayerDefensive
+
+
 
 
 
@@ -28,8 +33,26 @@ def run_simulation(desc: str, simulator: GameSimulator, iterations: int):
 
 def main():
     print("ESTG IA Games Simulator")
-    print("Number of iterations: ")
-    num_iterations = int(input())
+    #print("Number of iterations: ")
+    #num_iterations = int(input())
+    num_iterations = int(input("Number of iterations: "))
+    player1 = HumanEntrapmentPlayer("Human")
+    player2 = None
+
+    difficulty = input("Choose difficulty level (1: easy / 2: medium / 3: hard): ")
+
+    if difficulty == "1":
+        player2 = RandomEntrapmentPlayer("Computer")
+    elif difficulty == "2":
+        player2 = MinimaxEntrapmentPlayer("Computer")
+    elif difficulty == "3":
+        player2 = MinimaxEntrapmentPlayerDefensive("Computer")
+    else:
+        print("Invalid difficulty level. Please choose from '1', '2', or '3'.")
+        return
+    
+    simulator = EntrapmentSimulator(player1, player2, difficulty)
+    run_simulation("Entrapment - Human VS Computer", simulator, num_iterations)
 
 
     # c4_simulations = [
@@ -123,8 +146,6 @@ def main():
         #}
     #]
 
-
-
     # for sim in c4_simulations:
     #     run_simulation(sim["name"], Connect4Simulator(sim["player1"], sim["player2"]), num_iterations)
     #
@@ -133,25 +154,7 @@ def main():
 
     #for sim in etp_simulations:
      #   run_simulation(sim["name"], EntrapmentSimulator(sim["player1"], sim["player2"]), num_iterations)
-
-    PLAYER_1 = "Player 1"
-    PLAYER_2 = "Player 2"
-
-    player1 = HumanEntrapmentPlayer(PLAYER_1)
-    player2 = None
-    difficulty = input("Choose difficulty level (easy/medium/hard): ")
-    if difficulty == "easy":
-        player2 = RandomEntrapmentPlayer(PLAYER_2)
-    elif difficulty == "medium":
-        player2 = GreedyEntrapmentPlayer(PLAYER_2)
-    elif difficulty == "hard":
-        player2 = MinimaxEntrapmentPlayer(PLAYER_2)
-    else:
-        print("Invalid difficulty level. Please choose from 'easy', 'medium', or 'hard'.")
-        return
-
-    simulator = EntrapmentSimulator(player1, player2, difficulty)
-    simulator.run()
+   
 
 if __name__ == "__main__":
     main()
