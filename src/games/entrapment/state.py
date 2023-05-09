@@ -11,21 +11,21 @@ class EntrapmentState(State):
     def __init__(self, num_rows: int = 7, num_cols: int = 7):
         super().__init__()
 
-        if num_rows < 7:
+        if int(num_rows) < 7:
             raise Exception("the number of rows must be 7 or over")
-        if num_cols < 6:
+        if int(num_cols) < 6:
             raise Exception("the number of rows must be 6 or over")
 
         """
         the dimensions of the board
         """
-        self.__num_rows = num_rows
-        self.__num_cols = num_rows
+        self.__num_rows = int(num_rows)
+        self.__num_cols = int(num_cols)
 
         """
         the grid
         """
-        self.__grid = [[EntrapmentState.EMPTY_CELL for _i in range(self.__num_rows)] for _j in range(self.__num_cols)]
+        self.__grid = [[EntrapmentState.EMPTY_CELL for _i in range(self.__num_cols)] for _j in range(self.__num_rows)]
 
         """
         counts the number of turns in the current game
@@ -92,38 +92,41 @@ class EntrapmentState(State):
         wall_row = action.get_wall_row()
 
         # valid column
-        if col < 0 or col >= self.__num_cols:
+        if col is None or col < 0 or col >= self.__num_cols:
             print("Invalid column!")
             return False
         # valid row
-        if row < 0 or row >= self.__num_rows:
+        if row is None or row < 0 or row >= self.__num_rows:
             print("Invalid row!")
             return False
 
         # valid new column
+        if new_col is None:  # Adicionado tratamento para None
+            print("Invalid new column!")
+            return False
         if new_col < 0 or new_col >= self.__num_cols:
             print("Invalid new column!")
             return False
         # valid new row
-        if new_row < 0 or new_row >= self.__num_rows:
+        if new_row is None or new_row < 0 or new_row >= self.__num_rows:
             print("Invalid new row!")
             return False
 
         # valid wall column
-        if wall_col < 0 or wall_col >= self.__num_cols:
+        if wall_col is None or wall_col < 0 or wall_col >= self.__num_cols:
             print("Invalid column!")
             return False
         # valid wall row
-        if wall_row < 0 or wall_row >= self.__num_rows:
+        if wall_row is None or wall_row < 0 or wall_row >= self.__num_rows:
             print("Invalid row!")
             return False
 
         # each roamer can only move one house at a time
         if new_col > (col + 1):
-            print("Invalid new column! (can only move one house at a time)")
+            print("Invalid new column!")
             return False
         if new_row > (row + 1):
-            print("Invalid new row! (can only move one house at a time)")
+            print("Invalid new row!")
             return False
 
         return True
