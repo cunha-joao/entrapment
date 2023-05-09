@@ -12,6 +12,12 @@ from games.poker.simulator import KuhnPokerSimulator
 from games.entrapment.players.human import HumanEntrapmentPlayer
 from games.entrapment.players.random import RandomEntrapmentPlayer
 from games.entrapment.simulator import EntrapmentSimulator
+from games.entrapment.players.greedy import GreedyEntrapmentPlayer
+from games.entrapment.players.minimax import MinimaxEntrapmentPlayer
+from games.entrapment.players.minimax_defensive import MinimaxEntrapmentPlayerDefensive
+
+
+
 
 
 def run_simulation(desc: str, simulator: GameSimulator, iterations: int):
@@ -27,8 +33,27 @@ def run_simulation(desc: str, simulator: GameSimulator, iterations: int):
 
 def main():
     print("ESTG IA Games Simulator")
-    print("Number of iterations: ")
-    num_iterations = int(input())
+    #print("Number of iterations: ")
+    #num_iterations = int(input())
+    num_iterations = int(input("Number of iterations: "))
+    player1 = HumanEntrapmentPlayer("Human")
+    player2 = None
+
+    difficulty = input("Choose difficulty level (1: easy / 2: medium / 3: hard): ")
+
+    if difficulty == "1":
+        player2 = RandomEntrapmentPlayer("Computer")
+    elif difficulty == "2":
+        player2 = MinimaxEntrapmentPlayer("Computer")
+    elif difficulty == "3":
+        player2 = MinimaxEntrapmentPlayerDefensive("Computer")
+    else:
+        print("Invalid difficulty level. Please choose from '1', '2', or '3'.")
+        return
+    
+    simulator = EntrapmentSimulator(player1, player2, difficulty)
+    run_simulation("Entrapment - Human VS Computer", simulator, num_iterations)
+
 
     # c4_simulations = [
     #     # uncomment to play as human
@@ -127,9 +152,9 @@ def main():
     # for sim in poker_simulations:
     #     run_simulation(sim["name"], KuhnPokerSimulator(sim["player1"], sim["player2"]), num_iterations)
 
-    for sim in etp_simulations:
-        run_simulation(sim["name"], EntrapmentSimulator(sim["player1"], sim["player2"]), num_iterations)
-
+    #for sim in etp_simulations:
+     #   run_simulation(sim["name"], EntrapmentSimulator(sim["player1"], sim["player2"]), num_iterations)
+   
 
 if __name__ == "__main__":
     main()

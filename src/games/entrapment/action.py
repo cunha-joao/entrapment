@@ -12,14 +12,25 @@ class EntrapmentAction:
     __wall_row: int
     __move_type: int
 
-    def __init__(self, col: int, row: int, new_col: int, new_row: int, wall_col: int, wall_row: int, move_type: int):
+    #def __init__(self, col: int, row: int, new_col: int, new_row: int, wall_col: int, wall_row: int, move_type: int):
+        #self.__col = col
+        #self.__row = row
+        #self.__new_col = new_col
+        #self.__new_row = new_row
+        #self.__wall_col = wall_col
+        #self.__wall_row = wall_row
+        #self.__move_type = move_type
+
+    def __init__(self, col, row, wall_col=None, wall_row=None, move_type=None, _col=None, _row=None):
         self.__col = col
         self.__row = row
-        self.__new_col = new_col
-        self.__new_row = new_row
         self.__wall_col = wall_col
         self.__wall_row = wall_row
         self.__move_type = move_type
+        self.__new_col = _col
+        self.__new_row = _row
+
+        
 
     def get_col(self):
         return self.__col
